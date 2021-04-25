@@ -5,7 +5,7 @@ const Main=props=>{
     const [likeStatus,setLikeStatus]=useState(true);
     const [disLikeStatus,setDisLikeStatus]=useState(true);
     const [disLike,setDisLike]=useState(25)
-    
+
     const increasehandler=()=>{
         let copyLike=like;
         let copyLikeStatus=likeStatus;
@@ -19,6 +19,14 @@ const Main=props=>{
             setLikeStatus(true)
         }
 
+        let copyDisLikeStatus=disLikeStatus;
+        if(!copyDisLikeStatus){
+            let copyDisLike=disLike;
+            copyDisLike-=1;
+            setDisLike(copyDisLike)
+            setDisLikeStatus(true)
+            
+        }
         
 
     }
@@ -34,14 +42,22 @@ const Main=props=>{
             setDisLike(copyDisLike)
             setDisLikeStatus(true)
         }
+        let copyLikeStatus=likeStatus;
+        if(!copyLikeStatus){
+            let copyLike=like;
+            copyLike-=1;
+            setLike(copyLike)
+            setLikeStatus(true)
+            
+        }
+        
     }
     return(
         <React.Fragment>
-            <span className="likes-counter">{like}</span>
+            
 
-            <button className={`like-button ${likeStatus?'liked':''}`} onClick={increasehandler}>Like | 100</button><br/>
-            <span className="dislikes-counter">{disLike}</span>
-            <button className={`dislike-button ${disLikeStatus?'disliked':''}`} onClick={decreasehandler}>Dislike | 25</button>
+            <button className={`like-button ${likeStatus?'':'liked'}`} onClick={increasehandler}>Like | <span>{like}</span></button>
+            <button className={`dislike-button ${disLikeStatus?'':'disliked'}`} onClick={decreasehandler}>Dislike | <span>{disLike}</span></button>
 
         </React.Fragment>
     );
